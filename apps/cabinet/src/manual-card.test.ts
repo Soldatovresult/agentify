@@ -39,7 +39,7 @@ describe("a product added by hand", () => {
       problems: [
         "Enter a product name.",
         'Write the price as a number with a dot, such as "5.00", and the currency in capitals, such as "USD".',
-        "Enter at least one field the buyer receives, in Latin letters, separated by commas, such as access_url.",
+        "Enter at least one order-result field in Latin letters, separated by commas, such as order_confirmation.",
       ],
     });
   });

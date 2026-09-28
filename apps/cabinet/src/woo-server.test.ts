@@ -1190,6 +1190,7 @@ describe("coming back from the shop with no session on the request", () => {
       "/orders",
       "/receipts",
       "/keys",
+      "/plan",
       "/settings",
       "/integrations",
       "/",
@@ -1201,7 +1202,9 @@ describe("coming back from the shop with no session on the request", () => {
       // everything else, the shop's import included, lands on the bare form.
       const screen = path.slice(1);
       expect(seen.to, path).toBe(
-        ["woocommerce", "orders", "receipts", "integrations", "keys", "settings"].includes(screen)
+        ["woocommerce", "orders", "receipts", "integrations", "keys", "plan", "settings"].includes(
+          screen,
+        )
           ? `/sign-in?destination=${screen}`
           : "/sign-in",
       );

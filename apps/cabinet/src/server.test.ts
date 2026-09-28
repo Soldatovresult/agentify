@@ -1218,7 +1218,15 @@ describe("the passwordless cabinet door", () => {
   it("returns somebody who opened a cabinet screen before signing in to that screen", async () => {
     const running = await started();
 
-    for (const screen of ["orders", "receipts", "keys", "settings", "woocommerce"]) {
+    for (const screen of [
+      "orders",
+      "receipts",
+      "integrations",
+      "keys",
+      "plan",
+      "settings",
+      "woocommerce",
+    ]) {
       const stopped = await running.browser.get(`/${screen}`);
       expect(stopped.to, screen).toBe(`/sign-in?destination=${screen}`);
       const form = await running.browser.get(stopped.to ?? "");
@@ -1401,10 +1409,27 @@ describe("the settings screen", () => {
     await publish(gateway, roomCard);
     await browser.signIn();
 
-    for (const path of ["/cards", "/orders", "/receipts", "/keys"]) {
+    for (const path of ["/cards", "/orders", "/receipts", "/integrations", "/keys", "/plan"]) {
       const screen = await browser.get(path);
       expect(screen.status, path).toBe(200);
       expect(screen.html, path).toContain('href="/settings"');
+    }
+  });
+
+  it("has a plan and billing screen with local previews of every pricing candidate", async () => {
+    const { browser } = await started();
+    await browser.signIn();
+
+    const screen = await browser.get("/plan");
+    expect(screen.status).toBe(200);
+    expect(screen.html).toContain('aria-current="page"');
+    expect(screen.html).toContain("Choose a pricing variant");
+    expect(screen.html).toContain("Platform pricing preview");
+    expect(screen.html).toContain('href="/plan?candidate=t1" aria-current="true"');
+
+    for (const id of ["t1", "t2", "t3", "t4", "t5", "t6"]) {
+      expect(screen.html).toContain(`href="/plan?candidate=${id}"`);
+      expect((await browser.get(`/plan?candidate=${id}`)).status, id).toBe(200);
     }
   });
 
@@ -1796,7 +1821,15 @@ describe("the way out to the documentation", () => {
     await publish(gateway, roomCard);
     await browser.signIn();
 
-    for (const path of ["/cards", "/orders", "/receipts", "/keys", "/settings"]) {
+    for (const path of [
+      "/cards",
+      "/orders",
+      "/receipts",
+      "/integrations",
+      "/keys",
+      "/plan",
+      "/settings",
+    ]) {
       const screen = await browser.get(`/cabinet${path}`);
       expect(screen.status, path).toBe(200);
 
@@ -2675,7 +2708,15 @@ describe("what every screen says about the address", () => {
 
     // The address sits in the account menu, which opens on it and leads to the
     // settings where that account is described (html.ts, accountRow).
-    for (const path of ["/cards", "/orders", "/receipts", "/keys", "/settings"]) {
+    for (const path of [
+      "/cards",
+      "/orders",
+      "/receipts",
+      "/integrations",
+      "/keys",
+      "/plan",
+      "/settings",
+    ]) {
       const answered = await browser.get(path);
       const account = /<details class="account">[\s\S]*?<\/details>/.exec(answered.html)?.[0] ?? "";
       expect(account, path).toContain(`<small>${PERSON}</small>`);

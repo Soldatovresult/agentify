@@ -171,7 +171,7 @@ ${action}
  * There is no WooCommerce page in the portal and this pass does not make one:
  * the connector is experimental and is not the acceptance gate for anything.
  */
-const WHAT_CONNECTING_DOES = `<p>The experimental connector works in test mode only and supports one kind of WooCommerce product: a published virtual download priced in USD, with one protected file, unlimited downloads, no stock management, and shop tax calculation turned off.</p>
+const WHAT_CONNECTING_DOES = `<p>Agentify is built for physical products, digital products, and services. This experimental WooCommerce connector currently works in test mode only and imports one narrow configuration: a published virtual download priced in USD, with one protected file, unlimited downloads, no stock management, and shop tax calculation turned off.</p>
   <p class="quiet">Connecting gives Agentify access to your shop, and importing publishes supported products as cards. You approve access in WooCommerce; Agentify never asks for your shop password.</p>`;
 
 /** The page a merchant connects from, and comes back to. */
@@ -358,7 +358,7 @@ const theConnection = (
   <form class="issue" method="post" action="${escaped(base)}/woocommerce/import">
     <div>
       <label>Import the catalog</label>
-      <p class="quiet">Reads up to ${PRODUCTS_AT_MOST} products and publishes only the supported single-file downloads described above. If the shop has more, the whole import is refused. Running it again updates the same cards.</p>
+      <p class="quiet">Reads up to ${PRODUCTS_AT_MOST} products and publishes only the product configuration currently supported by this connector, described above. Other products stay in your shop and can be connected through the SDK. If the shop has more than ${PRODUCTS_AT_MOST} products, the whole import is refused. Running it again updates the same cards.</p>
       <p class="quiet">If a product is later deleted from the shop, runs out, or stops being supported, its card stays listed, but the price check refuses the purchase before payment. Pause cards you no longer want agents to see.</p>
     </div>
     <button class="button button-primary" type="submit">Import the catalog</button>
@@ -630,7 +630,7 @@ export const wooSettingsBlock = (base: string, state: ShopTile): string => {
       }
       <div class="connect-actions"><a class="button button-secondary" href="${escaped(base)}/woocommerce">Your shop</a></div>`
         : state.kind === "none"
-          ? `<p>This experimental connector publishes only one narrow kind of WooCommerce product as a card, and the shop screen says which. Connect a shop first, then import its supported products.</p>
+          ? `<p>Agentify supports physical products, digital products, and services. This experimental connector currently imports one narrow WooCommerce configuration, described on the shop screen; other catalogs connect through the SDK.</p>
       <div class="connect-actions"><a class="button button-primary" href="${escaped(base)}/woocommerce">Connect a WooCommerce shop</a></div>`
           : `${noKeysYet(state)}
       <div class="connect-actions"><a class="button button-primary" href="${escaped(base)}/woocommerce">${state.kind === "waiting" ? "Check the connection" : "Connect again"}</a></div>`;

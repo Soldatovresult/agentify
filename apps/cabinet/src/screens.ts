@@ -263,10 +263,10 @@ const emptyCatalogue = (viewer: Viewer, wooAvailable: boolean): string => {
   <div class="demo-cards">
     <p class="demo-label">Example: here's how your cards will look</p>
     ${table(
-      ["Product", "Product code", "Price", "Delivery", "State", ""],
+      ["Product", "Product code", "Price", "Fulfillment", "State", ""],
       [
         example("Monthly service access", "access-monthly", "5.00 USD", FULFILLMENT_WORDS.sync),
-        example("Pro report", "report-pro", "12.00 USD", FULFILLMENT_WORDS.async),
+        example("Specialty coffee", "coffee-250g", "12.00 USD", "shipped"),
         example("30-minute consultation", "consult-30", "30.00 USD", FULFILLMENT_WORDS.confirm),
       ],
       "",

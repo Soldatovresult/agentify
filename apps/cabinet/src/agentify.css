@@ -1664,6 +1664,265 @@ h2 {
 .tariff-actions {
   padding: 16px 24px 24px;
 }
+
+/* The review switch is the first control on the local plan page. Selecting an
+   option redraws every card below it, so the changed state is visible without
+   scrolling to a detached technical preview. */
+.plan-page-lede {
+  margin-bottom: 20px;
+}
+.plan-switcher,
+.plan-card {
+  border: var(--hairline) solid var(--line);
+  border-radius: var(--radius-card);
+  background: var(--surface);
+}
+.plan-switcher {
+  margin-bottom: 28px;
+  padding: 24px;
+}
+.plan-switcher-copy,
+.plan-preview-heading,
+.plan-card-head {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 24px;
+}
+.plan-switcher-copy {
+  margin-bottom: 20px;
+}
+.plan-switcher-copy > div {
+  flex: 0 0 auto;
+}
+.plan-switcher-copy h2,
+.plan-preview-heading h2,
+.plan-card-head h2 {
+  margin: 0;
+}
+.plan-switcher-copy > p {
+  max-width: 540px;
+  margin: 0;
+  color: var(--muted);
+}
+.plan-candidates {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 10px;
+}
+.plan-candidates a {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  gap: 5px 12px;
+  min-width: 0;
+  min-height: 76px;
+  padding: 12px 14px;
+  border: var(--hairline) solid var(--line);
+  border-radius: 11px;
+  color: var(--fg-2);
+  background: var(--bg);
+}
+.plan-candidates a:hover {
+  border-color: color-mix(in srgb, var(--accent) 55%, var(--line));
+}
+.plan-candidates a[aria-current="true"] {
+  border-color: var(--accent);
+  color: var(--accent);
+  background: var(--accent-soft);
+  box-shadow: inset 0 0 0 1px var(--accent);
+}
+.plan-candidate-kind {
+  grid-column: 1 / -1;
+  color: var(--muted);
+  font: 600 0.625rem / 1.2 var(--font-mono);
+  letter-spacing: 0.045em;
+  text-transform: uppercase;
+}
+.plan-candidate-name {
+  min-width: 0;
+  overflow-wrap: anywhere;
+  font-size: 0.875rem;
+}
+.plan-candidate-price {
+  overflow-wrap: anywhere;
+  text-align: right;
+  font-size: 0.8125rem;
+}
+.plan-preview-heading {
+  align-items: center;
+  margin-bottom: 16px;
+}
+.plan-preview-heading .eyebrow,
+.plan-switcher .eyebrow,
+.plan-card .eyebrow {
+  margin: 0 0 5px;
+}
+.plan-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 16px;
+  align-items: stretch;
+}
+.plan-card {
+  min-width: 0;
+  padding: 24px;
+}
+.plan-card > :first-child {
+  margin-top: 0;
+}
+.plan-card > :last-child,
+.plan-card-head > div > :last-child,
+.plan-gap > :last-child {
+  margin-bottom: 0;
+}
+.plan-primary {
+  display: flex;
+  flex-direction: column;
+}
+.plan-card-head {
+  gap: 16px;
+}
+.plan-status {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  flex: 0 0 auto;
+  padding: 5px 9px;
+  border-radius: 999px;
+  color: var(--accent);
+  background: var(--accent-soft);
+  font-size: 0.75rem;
+  font-weight: 650;
+  white-space: nowrap;
+}
+.plan-status--active {
+  color: var(--pass);
+  background: color-mix(in srgb, var(--pass) 10%, transparent);
+}
+.plan-status .dot {
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: currentColor;
+}
+.plan-price {
+  margin: 22px 0 8px;
+  color: var(--fg);
+  font-size: clamp(2rem, 4vw, 3rem);
+  font-weight: 720;
+  letter-spacing: -0.04em;
+}
+.plan-price span {
+  color: var(--muted);
+  font-size: 0.9375rem;
+  font-weight: 500;
+  letter-spacing: 0;
+}
+.plan-card .tariff-includes {
+  padding: 0;
+}
+.billing-facts {
+  margin: 20px 0 0;
+}
+.billing-facts > div {
+  display: flex;
+  justify-content: space-between;
+  gap: 16px;
+  padding: 12px 0;
+  border-top: var(--hairline) solid var(--line);
+}
+.billing-facts dt {
+  color: var(--muted);
+}
+.billing-facts dd {
+  margin: 0;
+  text-align: right;
+  font-weight: 650;
+}
+.plan-wide {
+  grid-column: 1 / -1;
+}
+.plan-note,
+.plan-gap {
+  display: grid;
+  grid-template-columns: minmax(210px, 0.7fr) minmax(0, 1.3fr);
+  align-items: start;
+  gap: 28px;
+}
+.plan-gap {
+  border-left: 3px solid var(--accent);
+}
+.plan-gap > p {
+  margin-top: 0;
+  color: var(--muted);
+}
+.plan-actions {
+  margin-top: auto;
+  padding-top: 20px;
+}
+.plan-actions .button[disabled] {
+  cursor: not-allowed;
+  opacity: 0.5;
+}
+@media (max-width: 760px) {
+  .plan-switcher-copy {
+    display: grid;
+    gap: 8px;
+  }
+  .plan-candidates {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+  .plan-grid {
+    grid-template-columns: 1fr;
+  }
+  .plan-wide {
+    grid-column: auto;
+  }
+  .plan-note,
+  .plan-gap {
+    grid-template-columns: 1fr;
+    gap: 8px;
+  }
+}
+@media (max-width: 430px) {
+  .plan-switcher,
+  .plan-card {
+    padding: 20px;
+  }
+  .plan-candidates {
+    gap: 8px;
+  }
+  .plan-candidates a {
+    grid-template-columns: 1fr;
+    min-height: 92px;
+    padding: 11px 12px;
+  }
+  .plan-candidate-kind {
+    grid-column: auto;
+  }
+  .plan-candidate-price {
+    text-align: left;
+  }
+  .plan-preview-heading {
+    align-items: flex-start;
+  }
+  .plan-preview-heading h2 {
+    font-size: 1.25rem;
+  }
+  .plan-card-head {
+    display: grid;
+  }
+  .plan-card-head .plan-status {
+    justify-self: start;
+  }
+  .billing-facts > div {
+    display: grid;
+    gap: 3px;
+  }
+  .billing-facts dd {
+    text-align: left;
+  }
+}
 .connect-ways {
   display: grid;
   grid-template-columns: repeat(2, minmax(0, 1fr));

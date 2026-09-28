@@ -23,7 +23,7 @@ export const escaped = (value: string): string =>
     .replaceAll("'", "&#39;");
 
 /** Which of the screens with navigation on them is being looked at. */
-export type Tab = "cards" | "orders" | "receipts" | "integrations" | "keys" | "settings";
+export type Tab = "cards" | "orders" | "receipts" | "integrations" | "keys" | "plan" | "settings";
 
 export interface Chrome {
   /** Which of the three things this stack is, so every page names it. */
@@ -81,6 +81,7 @@ const TABS: readonly [Tab, string][] = [
   ["receipts", "Receipts"],
   ["integrations", "Integrations"],
   ["keys", "API keys"],
+  ["plan", "Plan & billing"],
   ["settings", "Settings"],
 ];
 

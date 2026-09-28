@@ -89,6 +89,7 @@ import {
   signInScreen,
 } from "./sign-in.js";
 import { stateScreen, statesScreen } from "./states.js";
+import { planScreen, pricingCandidateIn } from "./tariff.js";
 import { cardsFromTheShop, decimalOfMinorUnits, merchantItemIdFor } from "./woo-catalog.js";
 import {
   APP_NAME,
@@ -1058,6 +1059,7 @@ export function buildApp(config: CabinetConfig, parts: CabinetParts): Express {
     `${base}/keys`,
     `${base}/settings`,
     `${base}/integrations`,
+    `${base}/plan`,
     `${base}/woocommerce`,
   ];
   // Only for a page being drawn, and never at the cost of the request: a POST
@@ -1261,6 +1263,12 @@ export function buildApp(config: CabinetConfig, parts: CabinetParts): Express {
     response
       .type("html")
       .send(integrationsScreen(viewingSettings(request, base, settings.document)));
+  });
+
+  app.get(`${base}/plan`, (request, response) => {
+    response
+      .type("html")
+      .send(planScreen(viewing(request, base), pricingCandidateIn(request.query.candidate)));
   });
 
   app.post(`${base}/settings`, async (request, response) => {

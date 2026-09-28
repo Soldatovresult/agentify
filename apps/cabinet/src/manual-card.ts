@@ -55,7 +55,7 @@ const FIELD_PROBLEMS: Readonly<Record<string, string>> = {
   price:
     'Write the price as a number with a dot, such as "5.00", and the currency in capitals, such as "USD".',
   result:
-    "Enter at least one field the buyer receives, in Latin letters, separated by commas, such as access_url.",
+    "Enter at least one order-result field in Latin letters, separated by commas, such as order_confirmation.",
   params:
     "Enter what you need from the buyer in Latin letters, separated by commas, or leave it empty.",
   tags: "Use up to five different tags in Latin letters, separated by commas.",
@@ -154,7 +154,7 @@ export const newCardScreen = (
   <div class="lede">
     <div>
       <h1>Add a product</h1>
-      <p>The buyer's agent sees this card exactly as you fill it in. The product goes on sale as soon as you publish it.</p>
+      <p>Agentify's catalog is for physical products, digital products, and services. This local form previews the immediate and later fulfillment paths; it does not set up shipping.</p>
     </div>
   </div>
   ${
@@ -163,8 +163,8 @@ export const newCardScreen = (
       : ""
   }
   <form class="card-form" method="post" action="${escaped(base)}/cards">
-    ${box("title", "Product name", "The name shown in the catalog, such as “Monthly access”.", typed, " required")}
-    ${box("merchant_item_id", "Product code", "The code you use for this product in your own records, such as access-monthly.", typed, " required")}
+    ${box("title", "Product name", "The name shown in the catalog, such as “Specialty coffee, 250 g”.", typed, " required")}
+    ${box("merchant_item_id", "Product code", "The code you use for this product in your own records, such as coffee-250g.", typed, " required")}
     <div class="card-field card-field-wide">
       <label for="description">Description</label>
       <textarea id="description" name="description" rows="4" maxlength="500" required>${escaped(typed.description)}</textarea>
@@ -179,7 +179,7 @@ export const newCardScreen = (
       <p class="quiet">The amount with a decimal point, such as 5.00, and the currency code.</p>
     </div>
     ${box("tags", "Tags", "Up to five words in Latin letters, separated by commas. Agents use them to find the product in search.", typed)}
-    ${box("result", "What the buyer receives", "Field names in Latin letters, separated by commas, such as access_url.", typed, " required")}
+    ${box("result", "What the buyer receives", "Order-result field names in Latin letters, separated by commas, such as order_confirmation.", typed, " required")}
     ${box("params", "What you need from the buyer", "Field names separated by commas, such as email. Leave empty if you need nothing.", typed)}
     <fieldset class="card-field">
       <legend>When the buyer receives it</legend>

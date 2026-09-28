@@ -20,7 +20,6 @@ import type { CabinetDestination } from "./cabinet-entry.js";
 import { bare, brandLockup, escaped, page } from "./html.js";
 import { payoutWalletBlock } from "./payout-wallet.js";
 import type { Viewer } from "./screens.js";
-import { tariffBlock } from "./tariff.js";
 import { wooSettingsBlock } from "./woo-screens.js";
 
 /**
@@ -139,25 +138,23 @@ ${brandLockup("/")}
   );
 
 /**
- * The cabinet's settings, which hold four subjects.
+ * The cabinet's settings, which hold three account subjects.
  *
  * A page of its own rather than controls tucked onto the cards screen: none of
  * these is about a card, all of them are about the merchant. The name buyers
- * read is here; under it the address the merchant's money arrives at, which
- * lives in `payout-wallet.ts`; under that the WooCommerce shop a merchant can
- * sell the catalogue of, which is drawn by `woo-screens.ts` from the connection
- * this page was handed; and last the merchant's own account, which lives in
- * `account-settings.ts`. That one arrived because the address in the corner of
+ * read is here; beside it is the address the merchant's money arrives at,
+ * which lives in `payout-wallet.ts`; and last is the merchant's own account,
+ * which lives in `account-settings.ts`. Integrations and plan and billing have
+ * their own navigation sections. The account block arrived because the address in the corner of
  * every page is the one thing on a screen that says "this is you" — pressing it
  * has to lead somewhere that answers that, and the answer is a page with the
  * account on it.
  *
  * The order is the things about selling first and the account last, because a
  * merchant setting themselves up works down the page: what they are called,
- * where they are paid, where their products come from, and only then how they
- * get back in.
+ * where they are paid, and then how they get back in.
  *
- * The four are not the same kind of thing, so each is under a heading that
+ * The three are not the same kind of thing, so each is under a heading that
  * names which it is. Somebody landing here should be able to tell which part
  * they came for without reading the others.
  *
@@ -207,7 +204,6 @@ export const settingsScreen = (viewer: Viewer, problem?: string, typedName?: str
   <div class="panel-messages">${problem === undefined ? "" : `<p class="problem">${escaped(problem)}</p>`}</div>
   </section>
   <section class="settings-panel settings-pair">${payoutWalletBlock(viewer)}</section>
-  ${tariffBlock() === "" ? "" : `<section class="settings-panel settings-wide settings-tariff">${tariffBlock()}</section>`}
   <section class="settings-panel settings-wide settings-account">${accountSettings(viewer)}</section>
   </div>`;
 
@@ -247,8 +243,8 @@ export const integrationsScreen = (viewer: Viewer): string => {
           : `<div class="connect-way">${wooSettingsBlock(base, viewer.shop)}</div>`
       }
       <div class="connect-way">
-        <h3>SDK — for any site or service</h3>
-        <p class="quiet">The main way to connect. Your developer installs the <code>@nuanu-ai/agentify</code> package, publishes cards with an API key, and handles paid orders in your own code. Works on any platform, not just WordPress.</p>
+        <h3>SDK — for any store, site, or service</h3>
+        <p class="quiet">The main way to connect physical products, digital products, or services. Your developer installs the <code>@nuanu-ai/agentify</code> package, publishes cards with an API key, and handles paid orders in your own code. Works on any platform, not just WordPress.</p>
         <div class="connect-actions">
           <a class="button button-primary" href="/docs/quickstart">Open the connection guide</a>
           <a class="button button-secondary" href="${escaped(base)}/keys?new=key">Create an API key</a>

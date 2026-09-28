@@ -31,6 +31,7 @@ export const CABINET_DESTINATIONS = [
   "receipts",
   "integrations",
   "keys",
+  "plan",
   "settings",
   "woocommerce",
 ] as const;
